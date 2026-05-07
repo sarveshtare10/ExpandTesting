@@ -3,14 +3,14 @@ Feature: User Login
   Background:
     Given I navigate to the Expand Testing login page
 
-  @smoke
+
   Scenario: Successfully login with valid credentials
     When I enter "practice" as username
     And I enter "SuperSecretPassword!" as password
     And I click the login button
     Then I should be redirected to the secure page
     And I should see a "You logged into a secure area!" message
-
+    And I should see a welcome message containing my username "practice"
 
   Scenario: Fail to login with invalid username
     When I enter "invalid_user" as username

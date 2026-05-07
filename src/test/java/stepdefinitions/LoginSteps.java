@@ -52,6 +52,15 @@ public class LoginSteps {
     public void iShouldSeeAnErrorMessage(String expectedMessage) {
         iShouldSeeAMessage(expectedMessage); // Reusing the same method as both use the same flash alert element
     }
+
+    @Then("I should see a welcome message containing my username {string}")
+    public void iShouldSeeAWelcomeMessageContainingMyUsername(String username) {
+        String expectedHeader = "Hi, " + username;
+        String expectedSubtext = "Welcome to the Secure Area. When you are done click logout below.";
+        
+        Assert.assertEquals(loginPage.getWelcomeHeader(), expectedHeader, "Welcome header text does not match.");
+        Assert.assertEquals(loginPage.getWelcomeSubtext(), expectedSubtext, "Welcome subtext does not match.");
+    }
     
     @Given("I am logged in")
     public void iAmLoggedIn() {
