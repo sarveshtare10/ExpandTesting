@@ -28,7 +28,7 @@ public class LoginPage {
     @FindBy(xpath = "//a[contains(@class, 'button') and contains(@class, 'secondary') and contains(@class, 'radius')]")
     private WebElement logoutButton;
     
-    @FindBy(xpath = "//div[contains(@class, 'container')]//h4")
+    @FindBy(xpath = "//div[contains(@class, 'container')]//h4/strong")
     private WebElement welcomeHeader;
 
     @FindBy(xpath = "//div[contains(@class, 'container')]//h4/following-sibling::div")
@@ -65,7 +65,9 @@ public class LoginPage {
     }
 
     public String getWelcomeSubtext() {
-        return wait.until(ExpectedConditions.visibilityOf(welcomeSubtext)).getText();
+        // The subtext might actually be part of the h4 element or slightly different based on the error.
+        // Let's just find the text node containing the welcome text.
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(org.openqa.selenium.By.xpath("//div[contains(@class, 'container')]//div[contains(text(), 'Welcome to the Secure Area')]"))).getText();
     }
 
     public boolean isLogoutButtonDisplayed() {

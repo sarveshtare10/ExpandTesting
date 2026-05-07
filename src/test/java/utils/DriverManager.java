@@ -10,6 +10,8 @@ public class DriverManager {
     public static void initDriver() {
         if (driver == null) {
             ChromeOptions options = new ChromeOptions();
+            //options.addArguments("--headless=new"); // Run in modern headless mode
+            //options.addArguments("--window-size=1920,1080"); // Important for headless mode
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         }
